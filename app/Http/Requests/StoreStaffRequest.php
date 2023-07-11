@@ -25,6 +25,11 @@ class StoreStaffRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'username' => 'required|max:50|min:8',
+            'password' => 'required|max:50',
+            'phone_number' => 'regex:/(01)[0-9]{9}/|nullable',
+            'agency_id' => 'required',
         ];
     }
 }

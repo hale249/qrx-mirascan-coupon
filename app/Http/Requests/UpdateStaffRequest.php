@@ -26,8 +26,9 @@ class UpdateStaffRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'code' => 'required|max:255|unique:qrcodes,code,'.$this->id,
-            'url' => 'required|url'
+            'email' => 'required|max:255',
+            'phone_number' => 'regex:/(01)[0-9]{9}/|nullable',
+            'agency_id' => 'required',
         ];
     }
 }

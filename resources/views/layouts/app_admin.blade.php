@@ -91,7 +91,7 @@
                 <div class="dropdown ms-1">
                     <button class="btn btn-link p-0 position-relative" type="button" id="profileDropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                        Halv
+                        <span class="mr-3">{{ auth('admin')->user()->name ?? auth('admin')->user()->email ?? '' }}</span>
                         <picture>
                             <img class="f-w-10 rounded-circle" src="{{ asset('admin/images/profile-small.jpeg')}}"
                                  alt="HTML Bootstrap Admin Template by Pixel Rocket">

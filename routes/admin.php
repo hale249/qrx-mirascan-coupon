@@ -29,5 +29,7 @@ Route::prefix('my-admin')->group(static function () {
         Route::get('agency/{id}/delete', [AgencyController::class, 'destroy'])->name('agency.delete');
         Route::resource('staff', StaffController::class)->except(['show', 'destroy']);
         Route::get('staff/{id}/delete', [StaffController::class, 'destroy'])->name('staff.delete');
+        Route::get('staff/{id}/show-form-password', [StaffController::class, 'showFormPassword'])->name('staff.show-form-password');
+        Route::put('staff/{id}/change-password', [StaffController::class, 'changePassword'])->name('staff.change-password');
     });
 });

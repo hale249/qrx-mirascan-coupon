@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreQRCodeRequest extends FormRequest
+class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class StoreQRCodeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
-            'code' => 'required|max:255|unique:qrcodes|max:255',
-            'url' => 'required|url'
+            'password' => 'required|confirmed|min:8|string'
         ];
     }
 }

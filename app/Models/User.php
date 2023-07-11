@@ -47,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function agency()
+    {
+        return $this->belongsTo(Agency::class, 'agency_id', '_id');
+    }
 }
