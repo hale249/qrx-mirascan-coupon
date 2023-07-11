@@ -17,7 +17,7 @@ class CreateCusStaffsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('username');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('customer_id');
             $table->unsignedInteger('agency_id');
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();

@@ -18,10 +18,10 @@ class StaffController extends Controller
 {
     public function index(Request $request)
     {
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
         $searchText = $request->get('search_text');
         $searchAgencyId = $request->get('agency_id');
-        $query = User::query()->where('user_id', $userId)
+        $query = User::query()->where('customer_id', $userId)
             ->orderBy('id','ASC');
         if (!empty($searchText)) {
             $query = $query->where('name', 'like', '%' .$searchText . '%')
@@ -35,7 +35,7 @@ class StaffController extends Controller
 
         $agencies = Agency::query()
             ->select(['id', 'email', 'name'])
-            ->where('user_id', $userId)
+            ->where('customer_id', $userId)
             ->get();
 
         $staffs = $query->paginate(10);
@@ -45,18 +45,18 @@ class StaffController extends Controller
 
     public function create()
     {
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
         $agencies = Agency::query()
             ->select(['id', 'email', 'name'])
-            ->where('user_id', $userId)
+            ->where('customer_id', $userId)
             ->get();
 
         return view('staff.create', compact('agencies'));
     }
 
-    public function store(StoreStaffRequest $request)
+    public function store(StoreStaffRequest $request): RedirectResponse
     {
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
         $data = $request->only([
             'name', 'email', 'password', 'username', 'agency_id', 'phone_number'
         ]);
@@ -80,13 +80,18 @@ class StaffController extends Controller
         }
 
         $data['email_verified_at'] = Carbon::now()->timestamp;
-        $data['user_id'] = $userId;
+        $data['customer_id'] = $userId;
         $data['password'] = Hash::make($data['password']);
         $staff = User::query()->create($data);
         if (empty($staff)) {
             toastr()->addError('Có lỗi xảy ra');
             return redirect()->back();
         }
+
+        $staffCount = $agency->staff_count ?? 0;
+        $agency->update([
+            'staff_count' => $staffCount + 1
+        ]);
 
         toastr()->addSuccess('Thành công');
 
@@ -95,8 +100,8 @@ class StaffController extends Controller
 
     public function edit($id)
     {
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
-        $staff = User::query()->where('_id', $id)->where('user_id', $userId)->first();
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
+        $staff = User::query()->where('_id', $id)->where('customer_id', $userId)->first();
         if (empty($staff)) {
             toastr()->addError('User đại lý không tồn tại');
             return redirect()->back();
@@ -104,7 +109,7 @@ class StaffController extends Controller
 
         $agencies = Agency::query()
             ->select(['id', 'email', 'name'])
-            ->where('user_id', $userId)
+            ->where('customer_id', $userId)
             ->get();
 
         return view('staff.edit', compact('agencies', 'staff'));
@@ -116,8 +121,8 @@ class StaffController extends Controller
             'name', 'email', 'username', 'agency_id', 'phone_number'
         ]);
 
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
-        $staff = User::query()->where('_id', $id)->where('user_id', $userId)->first();
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
+        $staff = User::query()->where('_id', $id)->where('customer_id', $userId)->first();
         if (empty($staff)) {
             toastr()->addError('User đại lý không tồn tại');
 

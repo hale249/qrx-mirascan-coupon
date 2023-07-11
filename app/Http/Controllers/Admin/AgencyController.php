@@ -15,10 +15,10 @@ class AgencyController extends Controller
 {
     public function index(Request $request)
     {
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
         $searchText = $request->get('search_text');
         $query = Agency::query()
-            ->where('user_id', $userId)
+            ->where('customer_id', $userId)
             ->orderBy('id','ASC');
         if (!empty($searchText)) {
             $query = $query->where('name', 'like', '%' .$searchText . '%')
@@ -38,7 +38,7 @@ class AgencyController extends Controller
 
     public function store(StoreAgencyRequest $request): RedirectResponse
     {
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
 
         $data = $request->only([
             'name', 'email', 'phone_number', 'address'
@@ -46,7 +46,7 @@ class AgencyController extends Controller
         $data['email'] = trim($data['email']);
         $data['phone_number'] = trim($data['phone_number']);
         $checkAgency = Agency::query()
-            ->where('user_id', $userId)
+            ->where('customer_id', $userId)
             ->where('email', $data['email'])
             ->first();
         if (!empty($checkAgency)) {
@@ -54,7 +54,7 @@ class AgencyController extends Controller
             return redirect()->back();
         }
 
-        $data['user_id'] = $userId;
+        $data['customer_id'] = $userId;
         $agency = Agency::query()->create($data);
         if (empty($agency)) {
             toastr()->addError('Có lỗi xảy ra');
@@ -68,8 +68,8 @@ class AgencyController extends Controller
 
     public function edit($id)
     {
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
-        $agency = Agency::query()->where('_id', $id)->where('user_id', $userId)->first();
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
+        $agency = Agency::query()->where('_id', $id)->where('customer_id', $userId)->first();
         if (empty($agency)) {
             toastr()->addError('Đại lý không tồn tại');
             return redirect()->back();
@@ -86,8 +86,8 @@ class AgencyController extends Controller
 
         $data['email'] = trim($data['email']);
         $data['phone_number'] = trim($data['phone_number']);
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
-        $agency = Agency::query()->where('_id', $id)->where('user_id', $userId)->first();
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
+        $agency = Agency::query()->where('_id', $id)->where('customer_id', $userId)->first();
         if (empty($agency)) {
             toastr()->addError('Đại lý không tồn tại');
 
@@ -96,7 +96,7 @@ class AgencyController extends Controller
 
         $checkAgency = Agency::query()
             ->where('_id', '!=', $id)
-            ->where('user_id', $userId)
+            ->where('customer_id', $userId)
             ->where('email', $data['email'])
             ->first();
 
@@ -118,8 +118,8 @@ class AgencyController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $userId = Auth::guard('admin')->user()->user_id ?? '';
-        $agency = Agency::query()->where('_id', $id)->where('user_id', $userId)->first();
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
+        $agency = Agency::query()->where('_id', $id)->where('customer_id', $userId)->first();
         if (empty($agency)) {
             toastr()->addError('Đại lý không tồn tại');
 

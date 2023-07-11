@@ -66,7 +66,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-label-form required">Mật khẩu</label>
                         <div class="col-sm-10">
-                            <input id="url" type="text" class="form-control @error('password') is-invalid @enderror"
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                                    placeholder="Nhập mật khẩu..." name="password" value="{{ old('password') }}">
 
                             @error('password')

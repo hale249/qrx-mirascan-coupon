@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AgencyController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\StaffController;
-use App\Http\Controllers\StaticController;
+use App\Http\Controllers\StaffHomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,12 +20,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('', [StaticController::class, 'index'])->name('qrx.static');
-Route::get('1', [StaticController::class, 'index'])->name('home');
-Route::get('/v/s', [StaticController::class, 'qrcodeScan'])->name('qrx.scan');
-
 Auth::routes([
     'register' => false,
     'reset' => false,
     'verify' => false,
 ]);
+
+Route::group(['middleware'=>['auth']],function(){
+    Route::get('', [StaffHomeController::class, 'index'])->name('home');
+    Route::post('check-code', [StaffHomeController::class, 'checkCoupon'])->name('check-coupon');
+});

@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
 
         Admin::query()->updateOrCreate([
             'email' => $customer->email,
-            'user_id' => $customer->id,
+            'customer_id' => $customer->id,
         ], [
             'is_active' => true,
             'password' => Hash::make('admin@123@!')

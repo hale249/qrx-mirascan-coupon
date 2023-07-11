@@ -15,7 +15,7 @@ class CreateCusAccountsTable extends Migration
     {
         Schema::create('cus_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id', 50)->unique();
+            $table->string('customer_id', 50)->unique();
             $table->string('email', 50)->unique();
             $table->string('password');
             $table->tinyInteger('is_active')->default(true)->nullable();

@@ -8,7 +8,7 @@ class Agency extends Model
 {
     protected $table = 'cus_agencies';
     protected $fillable = [
-        'user_id',
+        'customer_id',
         'name',
         'email',
         'phone_number',

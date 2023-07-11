@@ -6,9 +6,16 @@
             <h2>XÁC THỰC COUPON</h2>
 
             <div class="col-md-8 m-auto">
-                <form action="" method="GET" class="form-inline w-100 mt-4">
+                <form action="{{ route('check-coupon') }}" method="post" class="form-inline w-100 mt-4">
+                    @csrf
                     <div class="mb-4">
-                        <input type="text" name="search_text" value="{{ request()->get('code') }}" class="form-control" style="min-width: 250px" placeholder="Nhập mã code">
+                        <input type="text" name="coupon" value="{{ request()->get('coupon') }}" class="form-control @error('coupon') is-invalid @enderror" style="min-width: 250px" placeholder="Nhập mã coupon">
+
+                        @error('coupon')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
                     </div>
 
                    <div>

@@ -36,9 +36,9 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label">Tên đăng nhập</label>
-                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Nhập tên đăng nhập...">
-                                @error('email')
+                                <label for="username" class="form-label">Tên đăng nhập</label>
+                                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Nhập tên đăng nhập...">
+                                @error('username')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
