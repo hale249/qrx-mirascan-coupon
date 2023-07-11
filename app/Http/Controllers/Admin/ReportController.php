@@ -10,9 +10,9 @@ class ReportController extends Controller
 
     public function index()
     {
-        $couponScanHistories = CouponScanHistory::query()->where()
-            ->with(['qrcode'])->get();
-        dd($couponScanHistories);
+//        $couponScanHistories = CouponScanHistory::query()->where()
+//            ->with(['qrcode'])->get();
+//        dd($couponScanHistories);
         return view('report.index');
     }
 }

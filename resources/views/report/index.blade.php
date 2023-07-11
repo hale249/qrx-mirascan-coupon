@@ -40,17 +40,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center">
-                                <span
-                                    class="f-w-7 f-h-7 p-2 bg-success-faded text-success rounded-circle d-flex align-items-center justify-content-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="w-100"><polyline
-                                            points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline
-                                            points="17 6 23 6 23 12"></polyline></svg>
-                                </span>
-                            <span class="fw-bold text-success fs-9 ms-2">+ 10.2%</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -75,17 +64,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center">
-                                <span
-                                    class="f-w-7 f-h-7 p-2 bg-danger-faded text-danger rounded-circle d-flex align-items-center justify-content-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="w-100"><polyline
-                                            points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline
-                                            points="17 18 23 18 23 12"></polyline></svg>
-                                </span>
-                            <span class="fw-bold text-danger fs-9 ms-2">- 23.5%</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -108,17 +86,6 @@
                                     <canvas id="chartPageviews"></canvas>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-center">
-                                <span
-                                    class="f-w-7 f-h-7 p-2 bg-success-faded text-success rounded-circle d-flex align-items-center justify-content-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="w-100"><polyline
-                                            points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline
-                                            points="17 6 23 6 23 12"></polyline></svg>
-                                </span>
-                            <span class="fw-bold text-success fs-9 ms-2">+ 1.1%</span>
                         </div>
                     </div>
                 </div>
@@ -144,27 +111,57 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center">
-                                <span
-                                    class="f-w-7 f-h-7 p-2 bg-success-faded text-success rounded-circle d-flex align-items-center justify-content-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                         stroke-linejoin="round" class="w-100"><polyline
-                                            points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline
-                                            points="17 6 23 6 23 12"></polyline></svg>
-                                </span>
-                            <span class="fw-bold text-success fs-9 ms-2">+ 7.5%</span>
-                        </div>
                     </div>
                 </div>
             </div>
             <!-- / Number Refunds Widget-->
         </div>
 
-{{--        <div class="card">--}}
-{{--            <div class="card-body">--}}
-
-{{--            </div>--}}
-{{--        </div>--}}
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col">
+                        <form action="" method="GET" class="form-inline w-100  mt-2 d-flex flex-wrap gap-2">
+                            <div>
+                                <input type="text" name="search_text" value="{{ request()->get('search_text') }}"
+                                       class="form-control" style="min-width: 300px;" placeholder="Tìm kiếm...">
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-sm btn-primary h-100">Tìm kiếm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th scope="col">Họ tên</th>
+                            <th style="min-width: 150px; width: 150px">Email</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th style="min-width: 200px; width: 200px">Code</th>
+                            <th style="min-width: 200px; width: 200px">Đại lý xác thực</th>
+                            <th style="min-width: 200px; width: 200px">Nhân viên xác thực</th>
+                            <th style="min-width: 120px; width: 120px">Ngày xác thực</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">
+                                1
+                            </th>
+                            <td>Ha le</td>
+                            <td>halv@gmail.com</td>
+                            <td>09749223</td>
+                            <td>4334334</td>
+                            <td>Halv</td>
+                            <td>hal co</td>
+                            <td>22/23/30434</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </section>
 @endsection
