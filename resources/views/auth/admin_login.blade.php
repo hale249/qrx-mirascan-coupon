@@ -80,9 +80,9 @@
             <form class="mt-4" method="POST" action="{{ route('admin.login') }}">
                 @csrf
                 <div class="form-group">
-                    <label class="form-label" for="login-username">Username</label>
-                    <input type="text" class="form-control  @error('username') is-invalid @enderror" id="login-username" placeholder="Username">
-                    @error('username')
+                    <label class="form-label" for="login-email">Username</label>
+                    <input type="text" name="email" class="form-control  @error('email') is-invalid @enderror" id="login-email" placeholder="Email">
+                    @error('email')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -92,7 +92,7 @@
                     <label for="login-password" class="form-label d-flex justify-content-between align-items-center">
                         Mật khẩu
                     </label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="login-password" placeholder="Password">
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="login-password" placeholder="Password">
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

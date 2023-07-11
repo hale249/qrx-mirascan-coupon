@@ -1,12 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AgencyController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\StaticController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StaticController;
-use \App\Http\Controllers\AdminAuthController;
-use \App\Http\Controllers\StaffController;
-use \App\Http\Controllers\AgencyController;
-use \App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +29,3 @@ Auth::routes([
     'reset' => false,
     'verify' => false,
 ]);
-
-Route::group(['prefix'=>'my-admin'], function(){
-    Route::get('', [ReportController::class, 'index'])->name('admin.home');
-
-    Route::get('login', [AdminAuthController::class, 'showFormLogin'])->name('admin.show.form.login');
-    Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login');
-    Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-
-    Route::resource('agency', AgencyController::class)->except('show');
-    Route::resource('staff', StaffController::class)->except('show');
-});

@@ -75,8 +75,8 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-label-form"></label>
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
-                                    <a href="{{ route('adminhome') }}" style="margin-left: 10px">Trở lại</a>
+                                    <button type="submit" class="btn btn-sm btn-primary">Cập nhật</button>
+                                    <a href="{{ route('admin.home') }}" style="margin-left: 10px">Trở lại</a>
                                 </div>
                             </div>
                         </form>

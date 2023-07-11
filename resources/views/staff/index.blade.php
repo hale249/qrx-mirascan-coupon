@@ -5,7 +5,8 @@
 @section('content')
 
     <div class="bg-white border-bottom py-3 mb-3">
-        <div class="container-fluid d-flex justify-content-between align-items-start align-items-md-center flex-column flex-md-row">
+        <div
+            class="container-fluid d-flex justify-content-between align-items-start align-items-md-center flex-column flex-md-row">
             <nav class="mb-0" aria-label="breadcrumb">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Tổng quan</a></li>
@@ -19,7 +20,8 @@
         <h2 class="fs-3 fw-bold mb-3">Danh sách user đại lý</h2>
 
         <div class="card">
-            <div class="card-header flex p-2" style="display: flex; justify-content: space-between; align-items: center">
+            <div class="card-header flex p-2"
+                 style="display: flex; justify-content: space-between; align-items: center">
                 <div>
                     <h4>Danh sách user đại lý</h4>
                 </div>
@@ -33,13 +35,14 @@
                     <div class="col">
                         <form action="" method="GET" class="form-inline w-100  mt-2 d-flex flex-wrap gap-2">
                             <div class="form-group">
-                                <input type="text" name="search_text" value="{{ request()->get('search_text') }}" class="form-control" style="min-width: 250px" placeholder="Tìm kiếm...">
+                                <input type="text" name="search_text" value="{{ request()->get('search_text') }}"
+                                       class="form-control" style="min-width: 250px" placeholder="Tìm kiếm...">
                             </div>
                             <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
-                @if(count($qrcodes)>0)
+                @if(count($staffs)>0)
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -50,7 +53,7 @@
                                 <th scope="col">Phone number</th>
                                 <th style="min-width: 200px; width: 200px">Đại lý</th>
                                 <th style="min-width: 120px; width: 120px">Ngày tạo</th>
-                                <th style="min-width: 120px; width: 120px">Hành động</th>
+                                <th style="min-width: 150px; width: 150px">Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -65,9 +68,10 @@
                                     <td>{{ $staff->agency->name ?? ''  }}</td>
                                     <td>{{ $qrcode->created_at ? $qrcode->created_at->format('d-m-Y'): '' }}</td>
                                     <td>
-                                        <a href="{{route('$staff.edit',$staff->id)}}" style="margin-right: 8px">Chỉnh
+                                        <a href="{{route('staff.edit',$staff->id)}}" style="margin-right: 8px">Chỉnh
                                             sửa</a>
-                                        <a onclick="return confirm('Chắc chắn bạn muốn xóa qrcode?')" href="{{route('$staff.delete',$staff->id)}}" class="text-danger">Xóa</a>
+                                        <a onclick="return confirm('Chắc chắn bạn muốn xóa qrcode?')"
+                                           href="{{route('staff.delete',$staff->id)}}" class="text-danger">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -76,7 +80,14 @@
                     </div>
                     <div style="float:right">{{$staffs->links()}}</div>
                 @else
-                    <h6 class="text-center">Không tìm thấy user đại lý!!! Vui lòng tạo user đại lý</h6>
+                    <div class="d-flex flex-column w-100 align-items-center">
+                        <div class="p-4 p-sm-5 col-lg-7 col-md-10 col-12 text-center px-4">
+                            <i class="ri-file-damage-fill ri-5x mb-3"></i>
+                            <h3 class="mb-4 display-5 fw-bold">Không tìm thấy user đại lý!!! Vui lòng tạo user đại
+                                lý</h3>
+                            <a class="btn btn-primary mt-4" href="{{ route('staff.create') }}">Tạo mới</a>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>

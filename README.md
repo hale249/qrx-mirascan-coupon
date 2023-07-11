@@ -1,4 +1,4 @@
-# QRCode marketing V1
+# QRCode marketing coupon
 
 ### Prerequisite
 **Install PHP 7.4**

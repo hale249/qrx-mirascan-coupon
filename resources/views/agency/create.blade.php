@@ -41,7 +41,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-label-form required">Email</label>
                             <div class="col-sm-10">
-                                <input id="code" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Nhập email..." name="code" value="{{ old('code') }}">
+                                <input id="code" type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Nhập email..." name="email" value="{{ old('email') }}">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -53,9 +53,9 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-label-form">Số điện thoại</label>
                             <div class="col-sm-10">
-                                <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Nhập số điện thoại..." name="url" value="{{ old('phone_number') }}">
+                                <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Nhập số điện thoại..." name="phone_number" value="{{ old('phone_number') }}">
 
-                                @error('url')
+                                @error('phone_number')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -71,7 +71,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-label-form"></label>
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Thêm mới</button>
                                 <a href="{{ route('admin.home') }}" style="margin-left: 10px">Trở lại</a>
                             </div>
                         </div>

@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
+    public $table = 'cus_accounts';
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table = 'cus_accounts';
 
     use Notifiable;
 
@@ -21,7 +22,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'job_title',
+        'name', 'email', 'password', 'is_active', 'logo', 'note'
     ];
 
     /**

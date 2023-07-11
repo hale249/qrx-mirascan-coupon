@@ -977,7 +977,7 @@
                                </svg>
                                 </span>
                             <span
-                                class="menu-link">Users</span>
+                                class="menu-link">Đại lý</span>
                         </a>
                     </li>
                     <li class="menu-item">

@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateAgencyRequest extends FormRequest
+class StoreStaffRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +21,10 @@ class UpdateAgencyRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'name' => 'required|max:255',
-            'email' => 'required|max:255',
-            'phone_number' => 'regex:/(01)[0-9]{9}/|nullable'
         ];
     }
 }
