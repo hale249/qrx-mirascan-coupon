@@ -1,0 +1,42 @@
+.required:before {
+    display: inline-block;
+    margin-right: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: SimSun,sans-serif;
+    line-height: 1;
+    content: "*";
+}
+
+th, h4, .qr-title {
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.gap-3 {
+    gap: 2px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 5px;
+    font-size: 12px;
+    width: 100%;
+}
+
+body, #app {
+    height: 100vh !important;
+}
+
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-xl {
+    font-size: 1.3rem;
+}
