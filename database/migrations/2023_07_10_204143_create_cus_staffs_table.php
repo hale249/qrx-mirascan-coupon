@@ -17,11 +17,11 @@ class CreateCusStaffsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('username');
-            $table->unsignedInteger('customer_id');
-            $table->unsignedInteger('agency_id');
+            $table->string('customer_id')->index('idx_customer_id_cus_staffs');;
+            $table->string('agency_id')->index('idx_agency_id_cus_staffs');;
             $table->string('password');
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('phone_number', 20)->nullable();
+            $table->string('remember_token', 100)->nullable();
             $table->timestamps();
         });
     }

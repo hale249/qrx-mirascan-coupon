@@ -29,4 +29,7 @@ Auth::routes([
 Route::group(['middleware'=>['auth']],function(){
     Route::get('', [StaffHomeController::class, 'index'])->name('home');
     Route::post('check-code', [StaffHomeController::class, 'checkCoupon'])->name('check-coupon');
+
+    Route::get('show-form-password', [StaffHomeController::class, 'showFormPassword'])->name('client.show-form-password');
+    Route::put('change-password', [StaffHomeController::class, 'changePassword'])->name('client.change-password');
 });

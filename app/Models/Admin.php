@@ -22,7 +22,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_active', 'logo', 'note', 'customer_id'
+        'name', 'email', 'password', 'is_active', 'logo', 'note', 'customer_id', 'customer_uid'
     ];
 
     /**
@@ -32,5 +32,9 @@ class Admin extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
     ];
 }

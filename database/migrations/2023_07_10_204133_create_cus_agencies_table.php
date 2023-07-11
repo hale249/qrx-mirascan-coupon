@@ -15,7 +15,7 @@ class CreateCusAgenciesTable extends Migration
     {
         Schema::create('cus_agencies', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('customer_id');
+            $table->string('customer_id')->index('idx_customer_id_cus_agencies');
             $table->string('name')->index('indx_name_cus_agencies');
             $table->string('email', 50);
             $table->string('phone_number', 20);

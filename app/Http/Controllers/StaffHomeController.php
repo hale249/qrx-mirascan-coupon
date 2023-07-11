@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\CheckCouponCodeRequest;
+use App\Http\Requests\UpdateCurrentPasswordRequest;
 use App\Models\Agency;
 use App\Models\CouponScanHistory;
-use App\Models\Customer;
 use App\Models\QRCode;
 use App\Models\QrResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StaffHomeController extends Controller
 {
@@ -24,30 +25,30 @@ class StaffHomeController extends Controller
         $userId = Auth::id();
         $data = $request->only(['coupon']);
         $data['coupon'] = trim($data['coupon']);
-        $customerId = Auth::user()->customer_id;
-        if (empty($customerId)) {
+        $customerUid = Auth::user()->customer->uid ?? '';
+        if (empty($customerUid)) {
             toastr()->addError('Lỗi không có customers');
             return redirect()->back();
         }
 
-//        $qrcodeIds = QRCode::query()
-//            ->where('customer_id', $customerId)
-//            ->where('category', 'coupon')
-//            ->pluck('_id')->toArray();
-//
-//        if (empty($qrcodeIds)) {
-//            toastr()->addError('Lỗi không có qrcode');
-//            return redirect()->back();
-//        }
+        $qrcodeIds = QRCode::query()
+            ->where('customer_id', $customerUid)
+            ->where('category', 'coupon')
+            ->pluck('_id')->toArray();
+
+        if (empty($qrcodeIds)) {
+            toastr()->addError('Lỗi không có qrcode');
+            return redirect()->back();
+        }
 
         $qrcodeResponse = QrResponse::query()
-//            ->whereIn('qrcode_id', $qrcodeIds)
+            ->whereIn('qrcode_id', $qrcodeIds)
             ->where('category', 'coupon')
             ->whereNotNull('coupon')
             ->where('coupon.code', '=', $data['coupon'])
             ->first();
         if (empty($qrcodeResponse)) {
-            toastr()->addError('Không có mã coupon');
+            sweetalert()->addError('Không có mã coupon');
 
             return redirect()->back();
         }
@@ -55,8 +56,7 @@ class StaffHomeController extends Controller
         $agencyId = Auth::user()->agency_id ?? '';
         $agency = Agency::query()->where('_id', $agencyId)->first();
         if (empty($agency)) {
-            toastr()->addError('Có lỗi xảy ra, không tìm thấy thông tin đại lý');
-
+            sweetalert()->addError('Có lỗi xảy ra, không tìm thấy thông tin đại lý');
             return redirect()->back();
         }
 
@@ -73,7 +73,38 @@ class StaffHomeController extends Controller
             'verify_count' => $scanCount + 1
         ]);
 
-        toastr()->addSuccess('Xác thực thành công');
+        sweetalert()->addSuccess('Xác thực thành công');
         return redirect()->back();
+    }
+
+    public function showFormPassword()
+    {
+        $user = Auth::user();
+        return view('profile.staff-reset-password', compact('user'));
+    }
+
+    public function changePassword(UpdateCurrentPasswordRequest $request): RedirectResponse
+    {
+        $data = $request->only([
+            'password', 'old_password'
+        ]);
+
+        if(!Hash::check($data['old_password'], Auth::user()->password)){
+            toastr()->addError('Mật khẩu hiện tại không đúng, vui lòng kiểm tra lại');
+            return redirect()->back();
+        }
+
+        $data['password'] = Hash::make($data['password']);
+        $user = Auth::user();
+        $userUpdate = tap($user)->update($data);
+        if (empty($userUpdate)) {
+            toastr()->addError('Có lỗi xảy ra');
+
+            return redirect()->back();
+        }
+
+        toastr()->addSuccess('Đổi mật khẩu thành công');
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

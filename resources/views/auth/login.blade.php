@@ -1,79 +1,112 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
+
+<!-- Head -->
 <head>
+    <!-- Page Meta Tags-->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon.ico') }}">
+    <link rel="mask-icon" href="{{ asset('favicon.ico')}}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 
-    <title>Đăng nhập | Mirascan</title>
+    <!-- Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{{ asset('admin/css/libs.bundle.css') }}" />
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ asset('admin/css/theme.bundle.css') }}" />
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .required:before {
+            display: inline-block;
+            margin-right: 4px;
+            color: #ff4d4f;
+            font-size: 14px;
+            font-family: SimSun,sans-serif;
+            line-height: 1;
+            content: "*";
+        }
+    </style>
+    <!-- Fix for custom scrollbar if JS is disabled-->
+    <noscript>
+        <style>
+            /**
+            * Reinstate scrolling for non-JS clients
+            */
+            .simplebar-content-wrapper {
+                overflow: auto;
+            }
+        </style>
+    </noscript>
+
+    <!-- Page Title -->
+    <title>Đăng nhập đại lý xác thực | Quản trị mirascan</title>
+
 </head>
 <body>
-<div id="app">
-<div class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-lg-4" style="margin-left: auto; margin-right: auto">
-                <div class="card bg-white shadow-sm">
-                    {{--                <div class="card-header">{{ __('Login') }}</div>--}}
 
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <img src="{{asset('images/logo.png')}}" height="100"  alt="Logo"/>
-                        </div>
-
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Tên đăng nhập</label>
-                                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Nhập tên đăng nhập...">
-                                @error('username')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Mật khẩu</label>
-                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Nhập mật khẩu...">
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                <label class="form-check-label" for="remember">
-                                    Ghi nhớ
-                                </label>
-                            </div>
-
-                            <div class="mb-0">
-                                <button type="submit" class="btn btn-primary w-100">
-                                    Đăng nhập
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+<!-- Main Section-->
+<section class="d-flex justify-content-center align-items-start vh-100 py-5 px-3 px-md-0">
+    <!-- Login Form-->
+    <div class="d-flex flex-column w-100 align-items-center mt-5">
+        <div class="shadow-lg rounded p-4 p-sm-5 bg-white form">
+            <div class="d-flex justify-content-center">
+                <img src="{{asset('images/logo.png')}}" height="80"  alt="Logo"/>
             </div>
+            <h3 class="fw-bold text-center">Đăng nhập nhân viên đại lý</h3>
+
+            <!-- Login Form-->
+            <form class="mt-4" method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="form-group">
+                    <label class="form-label" for="login-username">Username</label>
+                    <input type="text" name="username" class="form-control  @error('username') is-invalid @enderror" id="login-username" placeholder="Username">
+                    @error('username')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="login-password" class="form-label d-flex justify-content-between align-items-center">
+                        Mật khẩu
+                    </label>
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="login-password" placeholder="Password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary d-block w-100 my-4">Đăng nhập</button>
+            </form>
         </div>
     </div>
-</div>
-</div>
+    <!-- / Login Form-->
+
+</section>
+<!-- / Main Section-->
+
+<!-- Theme JS -->
+<!-- Vendor JS -->
+<script src="{{ asset('admin/js/vendor.bundle.js') }}"></script>
+
+<!-- Theme JS -->
+<script src="{{ asset('admin/js/theme.bundle.js') }}"></script>
 </body>
+
 </html>

@@ -27,7 +27,7 @@ class UpdateAgencyRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|max:255',
-            'phone_number' => 'regex:/(01)[0-9]{9}/|nullable'
+            'phone_number' => 'digits:10|nullable'
         ];
     }
 }

@@ -63,24 +63,17 @@
 <section class="d-flex justify-content-center align-items-start vh-100 py-5 px-3 px-md-0">
 
     <!-- Login Form-->
-    <div class="d-flex flex-column w-100 align-items-center">
-
-        <!-- Logo-->
-        <a href="https://miraway.vn" target="_blank" class="d-table mt-5 mb-4 mx-auto">
-            <div class="d-flex align-items-center">
-                <img src="{{asset('images/logo.png')}}" height="80"  alt="Logo"/>
-
-            </div>      </a>
-        <!-- Logo-->
-
+    <div class="d-flex flex-column w-100 align-items-center mt-5">
         <div class="shadow-lg rounded p-4 p-sm-5 bg-white form">
-            <h3 class="fw-bold text-center">Đăng nhập</h3>
-
+            <div class="d-flex justify-content-center">
+                <img src="{{asset('images/logo.png')}}" height="80"  alt="Logo"/>
+            </div>
+            <h3 class="fw-bold text-center">Đăng nhập quản trị đại lý</h3>
             <!-- Login Form-->
             <form class="mt-4" method="POST" action="{{ route('admin.login') }}">
                 @csrf
                 <div class="form-group">
-                    <label class="form-label" for="login-email">Username</label>
+                    <label class="form-label" for="login-email">Email</label>
                     <input type="text" name="email" class="form-control  @error('email') is-invalid @enderror" id="login-email" placeholder="Email">
                     @error('email')
                     <span class="invalid-feedback" role="alert">

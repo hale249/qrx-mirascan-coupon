@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $customer = Customer::query()->where('email', 'lehatybg1@gmail.com')->first();
+        $customer = Customer::query()->where('email', 'ngoclan70305991@gmail.com')->first();
         if (empty($customer)) {
             return;
         }
@@ -27,7 +27,9 @@ class DatabaseSeeder extends Seeder
         Admin::query()->updateOrCreate([
             'email' => $customer->email,
             'customer_id' => $customer->id,
+            'customer_uid' => $customer->uid,
         ], [
+            'name' => $customer->displayName ?? $customer->email,
             'is_active' => true,
             'password' => Hash::make('admin@123@!')
         ]);

@@ -25,14 +25,14 @@
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card h-100">
                     <div class="card-header justify-content-between align-items-center d-flex border-0 pb-0">
-                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Monthly
-                            Income</h6>
+                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Tổng QRCode
+                            Coupon</h6>
                     </div>
                     <div class="card-body">
                         <div class="row gx-4 mb-3 mb-md-1">
                             <div class="col-12 col-md-6">
-                                <p class="fs-3 fw-bold d-flex align-items-center"><span class="fs-9 me-1">$</span>
-                                    567,99</p>
+                                <p class="fs-3 fw-bold d-flex align-items-center"><span class="fs-9 me-1"></span>
+                                    {{ number_format($statistical['coupon'] ?? 0) }}</p>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="chart chart-sm">
@@ -49,14 +49,13 @@
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card h-100">
                     <div class="card-header justify-content-between align-items-center d-flex border-0 pb-0">
-                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Average
-                            Order</h6>
+                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Đại lý</h6>
                     </div>
                     <div class="card-body">
                         <div class="row gx-4 mb-3 mb-md-1">
                             <div class="col-12 col-md-6">
-                                <p class="fs-3 fw-bold d-flex align-items-center"><span class="fs-9 me-1">$</span>
-                                    193,99</p>
+                                <p class="fs-3 fw-bold d-flex align-items-center"><span class="fs-9 me-1"></span>
+                                    {{ number_format($statistical['agency'] ?? 0) }}</p>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="chart chart-sm">
@@ -73,13 +72,13 @@
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card h-100">
                     <div class="card-header justify-content-between align-items-center d-flex border-0 pb-0">
-                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Daily
-                            Pageviews</h6>
+                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Nhân
+                            viên</h6>
                     </div>
                     <div class="card-body">
                         <div class="row gx-4 mb-3 mb-md-1">
                             <div class="col-12 col-md-6">
-                                <p class="fs-3 fw-bold">95,456</p>
+                                <p class="fs-3 fw-bold">{{ number_format($statistical['staff'] ?? 0) }}</p>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="chart chart-sm">
@@ -96,14 +95,14 @@
             <div class="col-12 col-sm-6 col-xxl-3">
                 <div class="card h-100">
                     <div class="card-header justify-content-between align-items-center d-flex border-0 pb-0">
-                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Refund
-                            Issued</h6>
+                        <h6 class="card-title m-0 text-muted fs-xs text-uppercase fw-bolder tracking-wide">Số lượt xác
+                            thực</h6>
                     </div>
                     <div class="card-body">
                         <div class="row gx-4 mb-3 mb-md-1">
                             <div class="col-12 col-md-6">
-                                <p class="fs-3 fw-bold d-flex align-items-center"><span class="fs-9 me-1">$</span>
-                                    12,340</p>
+                                <p class="fs-3 fw-bold d-flex align-items-center"><span class="fs-9 me-1"></span>
+                                    {{ number_format($statistical['scan'] ?? 0) }}</p>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="chart chart-sm">
@@ -132,6 +131,7 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -140,24 +140,33 @@
                             <th scope="col">Họ tên</th>
                             <th style="min-width: 150px; width: 150px">Email</th>
                             <th scope="col">Số điện thoại</th>
-                            <th style="min-width: 200px; width: 200px">Code</th>
+                            <th style="min-width: 200px; width: 200px">Mã Coupon</th>
                             <th style="min-width: 200px; width: 200px">Đại lý xác thực</th>
                             <th style="min-width: 200px; width: 200px">Nhân viên xác thực</th>
                             <th style="min-width: 120px; width: 120px">Ngày xác thực</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">
-                                1
-                            </th>
-                            <td>Ha le</td>
-                            <td>halv@gmail.com</td>
-                            <td>09749223</td>
-                            <td>4334334</td>
-                            <td>Halv</td>
-                            <td>hal co</td>
-                            <td>22/23/30434</td>
+                        @if(count($scanHistories)>0)
+                            @foreach($scanHistories as $scan)
+                                <tr>
+                                    <th scope="row">
+                                        {{ $scanHistories->firstItem() + $loop->index  }}
+                                    </th>
+                                    <td>{{ !empty($scan->qrResponse->coupon['name']) ? $scan->qrResponse->coupon['name'] : '' }}</td>
+                                    <td>{{ !empty($scan->qrResponse->coupon['email']) ? $scan->qrResponse->coupon['email'] : ''  }}</td>
+                                    <td>{{ !empty($scan->qrResponse->coupon['phone']) ? $scan->qrResponse->coupon['phone'] : '' }}</td>
+                                    <td>{{ !empty($scan->qrResponse->coupon['code']) ? $scan->qrResponse->coupon['code'] : '' }}</td>
+                                    <td>{{ !empty($scan->agency->name) ? $scan->agency->name : '' }}</td>
+                                    <td>{{ !empty($scan->staff->name) ? $scan->staff->name : '' }}</td>
+                                    <td>{{ $scan->created_at ? $scan->created_at->format('d-m-Y'): '' }}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="8">Dữ liệu trống</td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>

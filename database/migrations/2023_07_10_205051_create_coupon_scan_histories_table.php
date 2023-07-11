@@ -15,11 +15,11 @@ class CreateCouponScanHistoriesTable extends Migration
     {
         Schema::create('coupon_scan_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('customer_id');
-            $table->unsignedInteger('qr_response_id');
-            $table->unsignedInteger('qrcode_id');
-            $table->unsignedInteger('agency_id');
-            $table->unsignedInteger('staff_id');
+            $table->string('customer_id');
+            $table->string('qr_response_id');
+            $table->string('qrcode_id');
+            $table->string('agency_id');
+            $table->string('staff_id');
             $table->timestamps();
             $table->index(['customer_id', 'qr_response_id', 'qrcode_id', 'agency_id', 'staff_id'], 'idx_info_group_coupon_scan');
         });

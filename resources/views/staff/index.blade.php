@@ -54,6 +54,7 @@
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th scope="col">Họ tên</th>
+                                <th scope="col">Username</th>
                                 <th style="min-width: 150px; width: 150px">Email</th>
                                 <th scope="col">Số điện thoại</th>
                                 <th style="min-width: 200px; width: 200px">Đại lý</th>
@@ -68,6 +69,7 @@
                                         {{ $staffs->firstItem() + $loop->index  }}
                                     </th>
                                     <td>{{ $staff->name }}</td>
+                                    <td>{{ $staff->username }}</td>
                                     <td>{{ $staff->email }}</td>
                                     <td>{{ $staff->phone_number }}</td>
                                     <td><a href="{{ route('agency.index', ['search_text' => $staff->agency->name ?? '']) }}">{{ $staff->agency->name ?? '' }}</a></td>

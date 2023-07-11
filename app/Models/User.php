@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cassandra\Custom;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
@@ -51,5 +52,9 @@ class User extends Authenticatable
     public function agency()
     {
         return $this->belongsTo(Agency::class, 'agency_id', '_id');
+    }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'customer_id', '_id');
     }
 }
