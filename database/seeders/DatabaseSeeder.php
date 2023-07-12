@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $customer = Customer::query()->where('email', 'ngoclan70305991@gmail.com')->first();
+        $customer = Customer::query()->where('email', 'y.do@bachquang.vn')->first();
         if (empty($customer)) {
             return;
         }

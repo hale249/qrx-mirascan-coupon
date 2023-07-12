@@ -38,7 +38,7 @@ class StaffHomeController extends Controller
 
         $qrcodeIds = $qrcodes->pluck('_id',)->toArray();
         if (empty($qrcodeIds)) {
-            toastr()->addError('Lỗi không có qrcode');
+            sweetalert()->addError('Có lỗi xảy ra, không tìm thấy mã coupon trên hệ thống');
             return redirect()->back();
         }
 

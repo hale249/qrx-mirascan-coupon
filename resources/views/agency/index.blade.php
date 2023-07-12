@@ -71,7 +71,7 @@
                                 <td>{{ $agency->phone_number }}</td>
                                 <td>{{ $agency->address }}</td>
                                 <td>{{ $agency->staff_count ?? 0 }}</td>
-                                <td>{{ $agency->scan_count ?? 0  }}</td>
+                                <td>{{ $agency->verify_count ?? 0  }}</td>
                                 <td>{{ $agency->created_at ? $agency->created_at->format('d-m-Y'): '' }}</td>
                                 <td>
                                     <a href="{{route('agency.edit',$agency->id)}}" style="margin-right: 8px">Chỉnh

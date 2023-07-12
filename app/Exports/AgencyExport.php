@@ -57,8 +57,8 @@ class AgencyExport implements WithColumnFormatting, FromArray, WithTitle, WithEv
                 $data['email'] =  $agency->email ?? '';
                 $data['phone'] = $agency->phone_number ?? '';
                 $data['address'] = $agency->address ?? '';
-                $data['staff_count'] = $agency->staff_count ?? '0';
-                $data['scan_count'] = $agency->scan_count ?? 0;
+                $data['staff_count'] = $agency->staff_count ?? 0;
+                $data['verify_count'] = $agency->verify_count ?? 0;
                 $data['created_at']= $agency->created_at ? $agency->created_at->format('d-m-Y'): '';
                 $collections[] = $data;
             }

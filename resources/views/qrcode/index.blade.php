@@ -17,7 +17,7 @@
     </div>
 
     <section class="container-fluid">
-        <h2 class="fs-3 fw-bold mb-3">Danh sách mới đại lý</h2>
+        <h2 class="fs-3 fw-bold mb-3">Danh sách mã QRCode Coupon</h2>
 
         <div class="card">
             <div class="card-body">
