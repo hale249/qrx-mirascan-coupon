@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 
 class Agency extends Model
 {
+    use SoftDeletes;
     protected $table = 'cus_agencies';
     protected $fillable = [
         'customer_id',

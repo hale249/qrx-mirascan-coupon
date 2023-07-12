@@ -23,6 +23,7 @@ class CreateCusAgenciesTable extends Migration
             $table->integer('staff_count')->default(0)->nullable();
             $table->integer('verify_count')->default(0)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

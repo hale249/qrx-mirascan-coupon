@@ -149,7 +149,7 @@ class AgencyController extends Controller
     {
         $searchText = $request->get('search_text');
         $userId = Auth::guard('admin')->user()->customer_id ?? '';
-        $fileName = 'scan_coupon' . date('Y_m_d_H_i_s', time()) . '.xlsx';
+        $fileName = 'agency_' . date('Y_m_d_H_i_s', time()) . '.xlsx';
         return Excel::download(new AgencyExport($userId, $searchText ?? ''), $fileName);
     }
 }
