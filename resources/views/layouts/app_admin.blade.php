@@ -69,6 +69,7 @@
                 <img src="{{asset('images/logo.png')}}" height="50" alt="Logo"/>
             </div>
         </a>
+
         <div class="d-flex justify-content-between align-items-center flex-grow-1 navbar-actions">
 
             <!-- Search Bar and Menu Toggle-->

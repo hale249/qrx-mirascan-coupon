@@ -31,10 +31,12 @@ class StaffHomeController extends Controller
             return redirect()->back();
         }
 
-        $qrcodeIds = QRCode::query()
+        $qrcodes = QRCode::query()
             ->where('customer_id', $customerUid)
             ->where('category', 'coupon')
-            ->pluck('_id')->toArray();
+            ->get();
+
+        $qrcodeIds = $qrcodes->pluck('_id',)->toArray();
 
         if (empty($qrcodeIds)) {
             toastr()->addError('Lỗi không có qrcode');
@@ -49,6 +51,13 @@ class StaffHomeController extends Controller
             ->first();
         if (empty($qrcodeResponse)) {
             sweetalert()->addError('Không có mã coupon');
+
+            return redirect()->back();
+        }
+
+        $qrcodeStatus = $qrcodes->where('_id', $qrcodeResponse->qrcode_id)->first();
+        if (empty($qrcodeStatus) || $qrcodeStatus->status !== 'active') {
+            sweetalert()->addError('Coupon không khả dụng', 'Coupon này không hoạt động hoặc đã quá hạn sử dụng!');
 
             return redirect()->back();
         }

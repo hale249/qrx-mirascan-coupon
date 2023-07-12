@@ -55,9 +55,9 @@
                                 <th style="width: 10px">#</th>
                                 <th scope="col">Họ tên</th>
                                 <th scope="col">Username</th>
-                                <th style="min-width: 150px; width: 150px">Email</th>
+                                <th>Email</th>
                                 <th scope="col">Số điện thoại</th>
-                                <th style="min-width: 200px; width: 200px">Đại lý</th>
+                                <th>Đại lý</th>
                                 <th style="min-width: 120px; width: 120px">Ngày tạo</th>
                                 <th style="min-width: 250px; width: 250px">Hành động</th>
                             </tr>

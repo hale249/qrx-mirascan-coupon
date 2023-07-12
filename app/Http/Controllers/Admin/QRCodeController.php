@@ -16,7 +16,7 @@ class QRCodeController extends Controller
         $query = QRCode::query()
             ->where('category', 'coupon')
             ->where('customer_id', $customerUId)
-            ->orderBy('id','ASC');
+            ->orderBy('created_at','ASC');
         if (!empty($searchText)) {
             $query = $query->where('name', 'like', '%' .$searchText . '%');
         }

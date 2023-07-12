@@ -22,8 +22,11 @@ Route::prefix('my-admin')->group(static function () {
     Route::middleware(['auth:admin'])->group(static function () {
         Route::post('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
         Route::get('', [ReportController::class, 'index'])->name('admin.home');
+        Route::get('/scan-export', [ReportController::class, 'scanExport'])->name('admin.export');
 
         Route::resource('agency', AgencyController::class)->except(['show', 'destroy']);
+        Route::get('agency/export', [AgencyController::class, 'export'])->name('agency.export');
+
         Route::get('qrcode', [QRCodeController::class, 'index'])->name('qrcode.index');
         Route::get('agency/{id}/delete', [AgencyController::class, 'destroy'])->name('agency.delete');
         Route::resource('staff', StaffController::class)->except(['show', 'destroy']);

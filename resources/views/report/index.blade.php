@@ -118,16 +118,38 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="row mb-3">
+                <div class="row mb-3 justify-content-between align-items-center">
                     <div class="col">
-                        <form action="" method="GET" class="form-inline w-100  mt-2 d-flex flex-wrap gap-2">
+                        <form action="{{ route('admin.home') }}" method="GET" class="form-inline w-100  mt-2 d-flex flex-wrap gap-2">
                             <div>
-                                <input type="text" name="search_text" value="{{ request()->get('search_text') }}"
-                                       class="form-control" style="min-width: 300px;" placeholder="Tìm kiếm...">
+                                <select name="agency_id" style="min-width: 300px;" class="form-control @error('agency_id') is-invalid @enderror">
+                                    <option value="">--- Chọn đại lý ---</option>
+                                    @foreach($agencies as $agency)
+                                        <option value="{{ $agency->id }}" {{ request()->get('agency_id') === $agency->id  ? "selected" : ''}}>{{ $agency->name }} ({{ $agency->email }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mx-2 d-flex justify-content-center align-items-center gap-2">
+                                <span class="pr-2">Từ</span>
+                                <input type="date" name="from_date" value="{{ request()->get('from_date') }}"
+                                       class="form-control" style="min-width: 300px;" placeholder="Từ ngày">
+                            </div>
+
+                            <div class="mx-2 d-flex justify-content-center align-items-center gap-2">
+                                <span class="pr-2">Đến</span>
+                                <input type="date" name="to_date" value="{{ request()->get('to_date') }}"
+                                       class="form-control" style="min-width: 300px;" placeholder="Đến ngày">
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-sm btn-primary h-100">Tìm kiếm</button>
                             </div>
+                        </form>
+                    </div>
+
+                    <div class="col-2 d-flex justify-content-end">
+                        <form action="{{ route('admin.export') }}" method="GET">
+                            <button type="submit" class="btn btn-primary" style="height: 43px">Export</button>
                         </form>
                     </div>
                 </div>
@@ -138,11 +160,11 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th scope="col">Họ tên</th>
-                            <th style="min-width: 150px; width: 150px">Email</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Số điện thoại</th>
-                            <th style="min-width: 200px; width: 200px">Mã Coupon</th>
-                            <th style="min-width: 200px; width: 200px">Đại lý xác thực</th>
-                            <th style="min-width: 200px; width: 200px">Nhân viên xác thực</th>
+                            <th scope="col">Mã Coupon</th>
+                            <th scope="col">Đại lý xác thực</th>
+                            <th scope="col">Nhân viên xác thực</th>
                             <th style="min-width: 120px; width: 120px">Ngày xác thực</th>
                         </tr>
                         </thead>
@@ -164,7 +186,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="8">Dữ liệu trống</td>
+                                <td colspan="8" class="text-center">Dữ liệu trống</td>
                             </tr>
                         @endif
                         </tbody>

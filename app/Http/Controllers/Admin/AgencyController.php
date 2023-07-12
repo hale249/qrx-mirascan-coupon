@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AgencyExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAgencyRequest;
 use App\Http\Requests\UpdateAgencyRequest;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AgencyController extends Controller
 {
@@ -19,7 +21,7 @@ class AgencyController extends Controller
         $searchText = $request->get('search_text');
         $query = Agency::query()
             ->where('customer_id', $userId)
-            ->orderBy('id','ASC');
+            ->orderBy('created_at','ASC');
         if (!empty($searchText)) {
             $query = $query->where('name', 'like', '%' .$searchText . '%')
                 ->orWhere('email', 'like', '%' .$searchText . '%')
@@ -141,5 +143,13 @@ class AgencyController extends Controller
 
         toastr()->addSuccess('Thành công');
         return redirect()->route('agency.index');
+    }
+
+    public function export(Request $request)
+    {
+        $searchText = $request->get('search_text');
+        $userId = Auth::guard('admin')->user()->customer_id ?? '';
+        $fileName = 'scan_coupon' . date('Y_m_d_H_i_s', time()) . '.xlsx';
+        return Excel::download(new AgencyExport($userId, $searchText ?? ''), $fileName);
     }
 }

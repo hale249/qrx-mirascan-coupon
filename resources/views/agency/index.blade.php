@@ -25,7 +25,7 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="row mb-3">
+                <div class="row mb-3 justify-content-between align-items-center">
                     <div class="col">
                         <form action="" method="GET" class="form-inline w-100  mt-2 d-flex flex-wrap gap-2">
                             <div>
@@ -37,6 +37,12 @@
                             </div>
                         </form>
                     </div>
+
+                    <div class="col-2 d-flex justify-content-end">
+                        <form action="{{ route('agency.export') }}" method="GET">
+                            <button type="submit" class="btn btn-primary" style="height: 43px">Export</button>
+                        </form>
+                    </div>
                 </div>
                 @if(count($agencies)>0)
                 <div class="table-responsive">
@@ -45,11 +51,11 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th scope="col">Tên đại lý</th>
-                            <th style="min-width: 150px; width: 150px">Email</th>
+                            <th>Email</th>
                             <th scope="col">Số điện thoại</th>
-                            <th style="min-width: 200px; width: 200px">Đại chỉ</th>
-                            <th style="min-width: 200px; width: 200px">Số lượng NV</th>
-                            <th style="min-width: 200px; width: 200px">Số lần xác thực</th>
+                            <th>Đại chỉ</th>
+                            <th>Số lượng NV</th>
+                            <th>Số lần xác thực</th>
                             <th style="min-width: 120px; width: 120px">Ngày tạo</th>
                             <th style="min-width: 150px; width: 150px">Hành động</th>
                         </tr>
